@@ -219,6 +219,49 @@ section h3 {
   justify-content: center;
 }
 
+/* Activity Sharing */
+.activity-card.shared-activity {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+
+.activity-sharing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-light);
+}
+
+.activity-sharing .share-button {
+  display: inline-block;
+  padding: 6px 8px;
+  border: 1px solid var(--primary);
+  border-radius: 4px;
+  background-color: var(--surface);
+  color: var(--primary);
+  font-size: 0.8rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.activity-sharing .share-button:hover {
+  background-color: var(--primary);
+  color: var(--primary-text);
+}
+
+.activity-sharing .share-button:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.share-status {
+  width: 100%;
+  color: var(--text-secondary);
+}
+
 /* Activity Tag */
 .activity-tag {
   position: absolute;
