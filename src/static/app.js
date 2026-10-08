@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let searchQuery = "";
   let currentDay = "";
   let currentTimeRange = "";
+  let sharedActivity = new URLSearchParams(window.location.search).get("activity");
 
   // Authentication state
   let currentUser = null;
@@ -402,6 +403,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Apply search and filter, and handle weekend filter in client
       displayFilteredActivities();
+      if (sharedActivity) {
+        const sharedCard = document.getElementById(
+          `activity-${encodeURIComponent(sharedActivity)}`
+        );
+        if (sharedCard) {
+          sharedCard.classList.add("shared-activity");
+          sharedCard.tabIndex = -1;
+          sharedCard.focus({ preventScroll: true });
+          sharedCard.scrollIntoView({ block: "center" });
+        } else {
+          showMessage("This shared activity is no longer available.", "info");
+        }
+        sharedActivity = null;
+      }
     } catch (error) {
       activitiesList.innerHTML =
         "<p>Failed to load activities. Please try again later.</p>";
@@ -476,6 +491,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderActivityCard(name, details) {
     const activityCard = document.createElement("div");
     activityCard.className = "activity-card";
+    activityCard.id = `activity-${encodeURIComponent(name)}`;
 
     // Calculate spots and capacity
     const totalSpots = details.max_participants;
@@ -587,6 +603,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
 
+    activityCard.appendChild(ActivitySharing.createControls(name));
     activitiesList.appendChild(activityCard);
   }
 
